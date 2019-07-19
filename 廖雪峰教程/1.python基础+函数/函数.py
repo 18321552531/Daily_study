@@ -8,7 +8,7 @@
 print(hex(255))
 
 ##定义函数 pass
-
+##
 ##注意调用函数时候可以使用默认参数，重要的。
 def enroll(name,city,age=6):
     print('名字是：', name)
