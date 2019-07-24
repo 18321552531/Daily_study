@@ -313,8 +313,43 @@ HTML学习记录:
 			如果与 CSS 一同使用，<div> 元素可用于对大的内容块设置样式属性。
 			<div> 元素的另一个常见的用途是文档布局。它取代了使用表格定义布局的老式方法。
 			使用 <table> 元素进行文档布局不是表格的正确用法。<table> 元素的作用是显示表格化的数据。
+	☐	HTML <span> 元素   可用于为部分文本设置样式属性
+			HTML <span> 元素是内联元素，可用作文本的容器。
+			<span> 元素也没有特定的含义。
+			当与 CSS 一同使用时，<span> 元素可用于为部分文本设置样式属性。
 
+十七、HTML 类:
+	☐	对 HTML 进行分类（设置类），使我们能够为元素的类定义 CSS 样式。为相同的类设置相同的样式，或者为不同的类设置不同的样式。
+	☐	分类块级元素 <div>
+			<div>元素为块级元素，设置<div>类的话我们可以为相同的div设置相同的类。
+					<head>
+					<style>
+					.cities {
+					    background-color:black;
+					    color:white;
+					    margin:20px;
+					    padding:20px;
+					} 
+					</style>
+					</head>
+					<body>	
+					<div class="cities">
+					<h2>Paris</h2>
+					<p>Paris is the capital and most populous city of France.</p>
+					</div>				
+					</body>
+	☐	分类行内元素 <span>
+			HTML <span> 元素是行内元素，能够用作文本的容器。设置 <span> 元素的类，能够为相同的 <span> 元素设置相同的样式。
+				<head>
+				<style>
+				  span.red {color:red;}
+				</style>
+				</head>
+				<body>
+				<h1>My <span class="red">Important</span> Heading</h1>
+				</body>
 
-
-
+十八、HTML 布局:
+	☐	div元素通常是作为网页的布局工具，因为能轻松的通过CSS对其进行定位
+			
 
