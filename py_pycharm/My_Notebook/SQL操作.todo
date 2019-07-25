@@ -1,1 +1,4 @@
 SQL操作:
+  ☐ 插入某列数据：alter table my_table add column_name varchar()
+      MySQL可以再后面加 after column_name(已经存在) 来指定插入特定的位置。
+      Oracle则默认插入再最后一列。
