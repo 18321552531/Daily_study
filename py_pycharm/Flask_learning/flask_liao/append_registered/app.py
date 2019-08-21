@@ -10,6 +10,7 @@
 from flask import Flask, request, render_template
 import hashlib
 import pymysql
+import logging
 
 app = Flask(__name__)
 # mysql配置参数
@@ -29,10 +30,6 @@ def home():
 def sigin_form():
     return render_template('form.html')
 
-@app.route('/register', methods=['GET'])
-def register_form():
-    return render_template('register.html')
-
 @app.route('/signin', methods=['POST'])
 def signin():
     username = request.form['username']
@@ -51,6 +48,28 @@ def signin():
     elif password != res[0][2]:
         return render_template('form.html', message='密码错误!', username=username)
     return render_template('signin_ok.html', username=username)
+
+@app.route('/register', methods=['GET'])
+def register_form():
+    return render_template('register.html')
+
+@app.route('/register', methods=['POST'])
+def register():
+    username = request.form['username']
+    password = request.form['password']
+    # 连接数据库
+    db = pymysql.connect(**db_config)
+    # 打开游标
+    cursor = db.cursor()
+    # 插入数据
+    cursor.execute('select max(id) from signin_table')
+    id_max = cursor.fetchall()
+    cursor.execute("insert into signin_table (id,username,password) values \
+                   ('%s','%s','%s')"%(id_max[0][0]+1,username,password))
+    db.commit()
+    cursor.close()
+    db.close()
+    return render_template('register.html', message='注册成功!', username=username)
 
 if __name__ == '__main__':
     app.run()

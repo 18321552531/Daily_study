@@ -1,16 +1,16 @@
 <html>
 <head>
-  <title>Please Sign In</title>
+  <title>信息注册表</title>
 </head>
 <body>
   {% if message %}
   <p style="color:red">{{ message }}</p>
   {% endif %}
-  <form action="/signin" method="post">
-    <legend>Please sign in:</legend>
+  <form action="/register" method="post">
+    <legend>注册信息</legend>
     <p><input name="username" placeholder="Username" value="{{ username }}"></p>
     <p><input name="password" placeholder="Password" type="password"></p>
-    <p><button type="Register">Sign In</button></p>
+    <p><button type="submit">submit</button></p>
   </form>
 </body>
 </html>
