@@ -2,7 +2,14 @@
 # @Time    : 2019-07-18  23:35
 # @File    : test.py
 # @Author  : 啊啊
-print('hello python!')
+
+def locals_func():
+    a = 'aa'
+    b = 'cc'
+    c = 'asdf'
+    dic = locals()
+    return dic
+print(locals_func())
 
 
 
