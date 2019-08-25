@@ -7,7 +7,7 @@ eval:
 eval(source,global=None, locals=None)
 把一个字符串当做一个表达式来执行，返回表达式执行的结果
 
-eval:
+exec:
 eval(source,global=None, locals=None)
 把一个字符串当做一个程序来执行，
 
