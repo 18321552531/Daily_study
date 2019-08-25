@@ -15,6 +15,9 @@ config = {
 name = 'admin'
 db = pymysql.connect(**config)
 cursor = db.cursor()
+cursor.execute('select max(ID) from signin_table')
+id_max = cursor.fetchall()
+print(id_max[0][0])
 cursor.execute(r"select * from signin_table where username like '%s' " %name)
 res = cursor.fetchall()
 print(res[0][2])
