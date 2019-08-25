@@ -6,5 +6,10 @@
 </head>
 <body>
     <h1>标题</h1>
+    <p>
+        <img src="/static/pic/IMG_1028.jpg", width="350">
+        <img src="{{url_for('static',filename='pic/IMG_1028.jpg')}}">
+    </p>
+    <p><a href="{{url_for('static',filename='pic/IMG_1028.jpg')}}" >图片链接</a></p>
 </body>
 </html>
