@@ -1,0 +1,1 @@
+2019-08-27 22:21:25,725 - /Users/zhushengzu/python_load/py_pycharm/logging_test/logging_test.py[line:16] - DEBUG: hello_world
