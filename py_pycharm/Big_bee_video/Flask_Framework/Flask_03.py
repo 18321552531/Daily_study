@@ -10,6 +10,14 @@ app = Flask(__name__,template_folder='new_template')
 def index():
     return render_template('index.html')
 
+@app.route('/request')
+def req():
+    scheme = request.scheme
+    method = request.method
+    cookie = request.cookies
+    path = request.path 
+    return render_template('01_request.html',dic = locals())
+
 
 
 if __name__ == '__main__':
