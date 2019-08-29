@@ -15,7 +15,7 @@ def req():
     scheme = request.scheme
     method = request.method
     cookie = request.cookies
-    path = request.path 
+    path = request.path
     return render_template('01_request.html',dic = locals())
 
 
