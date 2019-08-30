@@ -9,7 +9,7 @@ def locals_func():
     c = 'asdf'
     dic = locals()
     return dic
-print(locals_func())
+# print(locals_func())
 
 
 

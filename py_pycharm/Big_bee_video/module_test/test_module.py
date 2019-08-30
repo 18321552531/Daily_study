@@ -4,9 +4,12 @@
 # @Author  : 啊啊
 
 import sys
+# sys.path.append('/Users/zhushengzu/python_load/py_pycharm')
 from module_one import my_module
+from py_pycharm.test import locals_func
 
 my_module()
+locals_func()
 
-print(sys.path)
-
+# print(sys.path)
+print(locals_func())
