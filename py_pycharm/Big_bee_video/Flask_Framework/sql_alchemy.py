@@ -79,16 +79,16 @@ class Course(db.Model):
 
 # 将创建好的实体类映射回数据库
 db.create_all()
-#
-# @app.route('/insert')
-# def inser_values():
-#     # 创建users对象
-#     users = Users('zszaa', 24, '729269746@qq.com')
-#     # 将对象db.session.add()插入数据库
-#     db.session.add(users)
-#     # 提交操作
-#     db.session.commit()
-#     return "insert success"
+
+@app.route('/insert')
+def inser_values():
+    # 创建users对象
+    coures = Course('English')
+    # 将对象db.session.add()插入数据库
+    db.session.add(coures)
+    # 提交操作
+    db.session.commit()
+    return "insert success"
 
 @app.route('/register', methods=['GET'])
 def register_form():
@@ -104,7 +104,11 @@ def register():
     db.session.commit()
     return '提交成功'
 
-
+@app.route('/query', )
+def query_view():
+    num = db.session.query(Users).all()
+    print(num)
+    return 'ok'
 
 
 if __name__ == '__main__':
