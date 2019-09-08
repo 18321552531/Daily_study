@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add</title>
+</head>
+<body>
+    <form action="/add_table" method="post">
+        <p>
+            姓名:<input type="text" name="pname" >
+        </p>
+        <p>
+            年龄:<input type="number" name="page" >
+        </p>
+        <p>
+            配偶:<select name="teacher_id">
+            <option value="-1">==请选择==</option>
+            {% for i in teachers %}
+            <option value="{{i.id}}">{{i.tname}}</option>
+            {% endfor %}
+        </select>
+        </p>
+        <p><input type="submit" value="提交"></p>
+    </form>
+</body>
+</html>

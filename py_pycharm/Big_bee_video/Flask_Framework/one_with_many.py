@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2019-09-05  20:18
-# @File    : sql_alchemy.py
+# @Time    : 2019-09-07  22:50
+# @File    : one_with_many.py
 # @Author  : 啊啊
+
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
@@ -57,7 +58,8 @@ class Teachers(db.Model):
     id = db.Column(db.Integer, primary_key=True,)
     tname = db.Column(db.String(30), nullable=False,)
     tage = db.Column(db.Integer, )
-
+    # 增加一个列：course_id ,外键列， 引用自主键表（course）
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
 
     def __init__(self, tname, tage):
         self.tname = tname
@@ -70,6 +72,10 @@ class Course(db.Model):
     __tablename__ = 'course'
     id = db.Column(db.Integer, primary_key=True,)
     cname = db.Column(db.String(30), nullable=False,)
+    # 反向引用：返回与当前课表相关的teacher列表
+    # backref: 定义反向关系，本质上会向Teacher实体中增加一个course属性。
+    teachers = db.relationship('Teachers', backref='course',lazy='dynamic')
+
 
     def __init__(self, cname, ):
         self.cname = cname
@@ -77,43 +83,31 @@ class Course(db.Model):
     def __repr__(self):
         return '<Student:%r>'%self.cname
 
-
-# 将创建好的实体类映射回数据库
+# db.drop_all()
 db.create_all()
+# db.session.commit()
 
-@app.route('/insert')
-def inser_values():
-    # 创建users对象
-    coures = Course('English')
-    # 将对象db.session.add()插入数据库
-    db.session.add(coures)
-    # 提交操作
+@app.route('/add')
+def add():
+    course1=Course('math')
+    course2=Course('english')
+    course3=Course('art')
+    course4=Course('chinese')
+    db.session.add(course1)
+    db.session.add(course2)
+    db.session.add(course3)
+    db.session.add(course4)
     db.session.commit()
-    return "insert success"
+    return "add_course ok!"
 
-@app.route('/register', methods=['GET'])
-def register_form():
-    return render_template('register.html')
-
-@app.route('/register', methods=['POST'])
-def register():
-    username = request.form['username']
-    age = request.form['age']
-    email = request.form['email']
-    users = Users(username,age,email)
-    db.session.add(users)
+@app.route('/add_teacher')
+def add_teacher():
+    teacher = Teachers('zhuaa', 21)
+    course=Course.query.filter_by(id=2).first()
+    teacher.course=course
+    db.session.add(teacher)
     db.session.commit()
-    return '提交成功'
-
-@app.route('/query', )
-def query_view():
-    num = db.session.query(Users).all()
-    print(num)
-    return 'ok'
-
+    return 'add_teacher ok!'
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2019-09-05  20:18
-# @File    : sql_alchemy.py
+# @Time    : 2019-09-08  16:22
+# @File    : one_with_one.py
 # @Author  : 啊啊
+
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import pymysql
 # print('import sql_alchemy')
 # pymysql.install_as_MySQLdb()
-
 app = Flask(__name__)
 # 指定连接字符串
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:zszaa0805@localhost:3306/flask'
@@ -57,7 +57,10 @@ class Teachers(db.Model):
     id = db.Column(db.Integer, primary_key=True,)
     tname = db.Column(db.String(30), nullable=False,)
     tage = db.Column(db.Integer, )
-
+    # 增加一个列：course_id ,外键列， 引用自主键表（course）
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    # 增加反向引用和partner实体类做反向引用，在partner中也能找到teachers
+    partner = db.relationship('Partner', backref='teacher',uselist=False)
 
     def __init__(self, tname, tage):
         self.tname = tname
@@ -66,10 +69,15 @@ class Teachers(db.Model):
     def __repr__(self):
         return '<Student:%r>'%self.tname
 
+
 class Course(db.Model):
     __tablename__ = 'course'
     id = db.Column(db.Integer, primary_key=True,)
     cname = db.Column(db.String(30), nullable=False,)
+    # 反向引用：返回与当前课表相关的teacher列表
+    # backref: 定义反向关系，本质上会向Teacher实体中增加一个course属性。
+    teachers = db.relationship('Teachers', backref='course',lazy='dynamic')
+
 
     def __init__(self, cname, ):
         self.cname = cname
@@ -77,43 +85,56 @@ class Course(db.Model):
     def __repr__(self):
         return '<Student:%r>'%self.cname
 
+class Partner(db.Model):
+    __tablename__ ='partner'
+    id = db.Column(db.Integer, primary_key=True,)
+    pname = db.Column(db.String(30), nullable=False,)
+    page = db.Column(db.Integer, )
+    # 增加一个列表示引用子teache表的主键
+    teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
 
-# 将创建好的实体类映射回数据库
+    def __init__(self, pname, page):
+        self.pname = pname
+        self.page = page
+    def __repr__(self):
+        return '<Partner:%r>'%self.pname
+
+# db.drop_all()
 db.create_all()
 
-@app.route('/insert')
-def inser_values():
-    # 创建users对象
-    coures = Course('English')
-    # 将对象db.session.add()插入数据库
-    db.session.add(coures)
-    # 提交操作
+@app.route('/add_partner')
+def add_partner():
+    partner = Partner('zhouzhou',20)
+    teacher = Teachers.query.filter_by(id=1).first()
+    partner.teacher=teacher
+    db.session.add(partner)
     db.session.commit()
-    return "insert success"
+    return 'add_partner ok!'
 
-@app.route('/register', methods=['GET'])
-def register_form():
-    return render_template('register.html')
-
-@app.route('/register', methods=['POST'])
-def register():
-    username = request.form['username']
-    age = request.form['age']
-    email = request.form['email']
-    users = Users(username,age,email)
-    db.session.add(users)
-    db.session.commit()
-    return '提交成功'
-
-@app.route('/query', )
-def query_view():
-    num = db.session.query(Users).all()
-    print(num)
+@app.route('/query_partner')
+def query_partner():
+    # 通过teacher找partner
+    teacher = db.session.query(Teachers).filter_by(id=1).first()
+    partner = teacher.partner
+    print(partner)
+    # 通过partner找teacher
     return 'ok'
 
+@app.route('/add_table', methods=['POST','GET'])
+def add_table():
+    if request.method == 'GET':
+        teachers = Teachers.query.all()
+        return render_template('add_onebyone.html', teachers=teachers)
+    else:
+        pname = request.form.get('pname')
+        page = request.form.get('page')
+        teacher_id = request.form.get('teacher_id')
+        partner = Partner(pname,page)
+        teacher = Teachers.query.filter_by(id=teacher_id).first()
+        partner.teacher=teacher
+        db.session.add(partner)
+        db.session.commit()
+        return 'ok add it!'
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
