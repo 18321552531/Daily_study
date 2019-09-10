@@ -1,0 +1,11 @@
+/*
+css规则主要有两部分组成：选择器和一条或多条声明
+  h1 {color:blue; font-size:12px}
+select            property   value
+其中选择器通常为需要改变的html样式
+*/
+
+p{color:red; text_align:center;}
+
+
+

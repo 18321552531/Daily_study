@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:zszaa0805@localhost:3306/flask'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # 执行完毕自动提交
-app.config['SQLALCHEMY_COMMIT_ON_TRARDOWN'] = True
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 db = SQLAlchemy(app)
 
 # 创建模型类 - Models
