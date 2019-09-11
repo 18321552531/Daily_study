@@ -22,6 +22,8 @@ def main():
 # 登入界面
 @main_view.route('/login')
 def login_view():
+    user = db.session.query(User).filter_by(id=1).first()
+    print(user)
     return render_template('login.html')
 
 # 注册界面

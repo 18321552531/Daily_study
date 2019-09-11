@@ -43,7 +43,7 @@ class User(db.Model):
     loginname = db.Column(db.String(50), nullable=False)
     uname = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(200), nullable=False)
-    url = db.Colums(db.String(200))
+    url = db.Column(db.String(200))
     upwd = db.Column(db.String(30), nullable=False)
     is_auther = db.Column(db.SmallInteger, default=0)
     # 增加与Topic之间的反向引用
@@ -96,3 +96,5 @@ class Reply(db.Model):
     def __init__(self, content, reply_time):
         self.content = content
         self.reply_time = reply_time
+
+# db.create_all()

@@ -34,6 +34,7 @@ def create_app():
     # 将user的蓝图和app关联到一起
     from .user import user
     app.register_blueprint(user)
+    app.app_context().push()
     return app
 
 
