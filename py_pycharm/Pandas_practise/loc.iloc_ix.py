@@ -11,3 +11,9 @@ df = pd.DataFrame(np.arange(20).reshape(4, 5),
                   columns=['A', 'B', 'C', 'D', 'E'])
 
 print(df.ix['d', 'B'])
+
+
+
+lis = ['a','b','c','d']
+for i,j in enumerate(lis):
+    print(i,j)

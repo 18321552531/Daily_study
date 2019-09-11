@@ -17,7 +17,10 @@ from ..models import *
 # 主界面
 @main_view.route('/',)
 def main():
-    return render_template('index.html')
+    cates = Category.query.all()
+    print(cates)
+    topics = Topic.query.all()
+    return render_template('index.html',cates=cates,topics=topics)
 
 # 登入界面
 @main_view.route('/login')

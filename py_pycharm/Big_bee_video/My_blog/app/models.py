@@ -45,17 +45,27 @@ class User(db.Model):
     email = db.Column(db.String(200), nullable=False)
     url = db.Column(db.String(200))
     upwd = db.Column(db.String(30), nullable=False)
-    is_auther = db.Column(db.SmallInteger, default=0)
+    is_author = db.Column(db.SmallInteger, default=0)
     # 增加与Topic之间的反向引用
     topic = db.relationship('Topic', backref='user', lazy='dynamic')
+    # 增加与reply之间的反向引用
+    reply = db.relationship('Reply', backref='user', lazy='dynamic')
+    # 增加与Topic之间的关联关系和反向引用
+    voke_topic = db.relationship(
+        'Topic',
+        secondary='voke',
+        backref = db.backref('voke.users',lazy='dynamic',),
+        lazy='dynamic',
+    )
 
-    def __init__(self, loginname, uname, email, url, upwd, is_auther):
+
+    def __init__(self, loginname, uname, email, url, upwd, is_author):
         self.loginname = loginname
         self.uname = uname
         self.email = email
         self.url = url
         self.upwd = upwd
-        self.is_auther = is_auther
+        self.is_auther = is_author
 
     def __repr__(self):
         return '<loginname:%s>' % self.loginname
@@ -67,7 +77,7 @@ class Topic(db.Model):
     title = db.Column(db.String(200), nullable=False)
     pub_date = db.Column(db.DateTime, nullable=False)
     read_num = db.Column(db.Integer, default=0)
-    context = db.Column(db.Text, nullable=False)
+    content = db.Column(db.Text, nullable=False)
     images = db.Column(db.Text)
     # 增加与category的映射关系（一对多）
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
@@ -75,6 +85,8 @@ class Topic(db.Model):
     blogtype_id = db.Column(db.Integer, db.ForeignKey('blogtype.id'))
     # 增加与User的映射关系（一对多）
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # 与reply之间的反向关系及引用
+    reply = db.relationship('Reply', backref='topic', lazy='dynamic')
 
     def __init__(self, title, pub_date, read_num, context, images):
         self.title = title
@@ -92,9 +104,19 @@ class Reply(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     reply_time = db.Column(db.DateTime, )
+    # 一对多关系：topic为一reply为多
+    topic_id = db.Column(db.Integer,db.ForeignKey('topic.id'))
+    # 一对多关系：user为一reply为多
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
 
     def __init__(self, content, reply_time):
         self.content = content
         self.reply_time = reply_time
 
+voke = db.Table(
+    'voke',
+    db.Column('id', db.Integer, primary_key=True),
+    db.Column('user_id', db.Integer,db.ForeignKey('user.id')),
+    db.Column('topic_id',db.Integer,db.ForeignKey('topic.id')),
+)
 # db.create_all()
