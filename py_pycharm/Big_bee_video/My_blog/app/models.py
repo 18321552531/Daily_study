@@ -59,13 +59,12 @@ class User(db.Model):
     )
 
 
-    def __init__(self, loginname, uname, email, url, upwd, is_author):
+    def __init__(self, loginname, uname, email, url, upwd):
         self.loginname = loginname
         self.uname = uname
         self.email = email
         self.url = url
         self.upwd = upwd
-        self.is_auther = is_author
 
     def __repr__(self):
         return '<loginname:%s>' % self.loginname

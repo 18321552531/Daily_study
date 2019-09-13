@@ -7,7 +7,7 @@ $(document).ready(function () {
     }
     // 弹窗回复评论
     var list = document.getElementsByClassName('replyComment');
-    for (var i of list) {
+    for (var i in list) {
         i.addEventListener("click", function (ev) {
             ev.preventDefault();
             var txt=  "请输入回复：";

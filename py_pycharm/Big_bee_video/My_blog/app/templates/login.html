@@ -6,6 +6,11 @@
 	<link rel="stylesheet" href="css/login_reglogin.css"/>
 </head>
 <body>
+	{% if errMsg %}
+	<script>
+		alert('用户名或者密码不正确!');
+	</script>
+	{% endif %}
 	<div class="bg">
 		<img src="images/b.jpg" alt="">
 	</div>
@@ -14,7 +19,7 @@
 			<h1>Login!</h1>
 		</div>
 		<p></p>
-		<form action="" method="post">
+		<form action="/login" method="post">
 			<ul class="right-form">
 				<h2>Login:</h2>
 				<li><input type="text" name="username" placeholder="Username" required/></li>
