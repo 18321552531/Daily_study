@@ -9,27 +9,29 @@ from socket import *
 sockfd = socket(AF_INET,SOCK_STREAM)
 
 # 2.绑定地址
-sockfd.bind(('0.0.0.0', 8802))
+sockfd.bind(('0.0.0.0', 8803))
 
 # 3.设置接听
 sockfd.listen(10)
 
-# 4.等到接受连接
-print('waiting connect')
-connfd, addr = sockfd.accept()
-print('connect it')
-
 while True:
-# 5.收发消息
-    data = connfd.recv(1024).decode()
-    # if data == '##':
-    #     break
-    print(data)
-    n = connfd.send(b'receive you messege')
-    print(f'发送了{n}字节')
+    # 4.等到接受连接
+    print('waiting connect')
+    connfd, addr = sockfd.accept()
+    print('connect it')
 
-# 6.关闭套接字
-connfd.close()
+    while True:
+    # 5.收发消息
+        data = connfd.recv(1024).decode()
+        if not data:
+            break
+        print(f'{addr} 向你发送消息{data}')
+        return_data = input("你要返回什么消息").encode()
+        n = connfd.send(return_data)
+        print(f'发送了{n}字节')
+
+    # 6.关闭套接字
+    connfd.close()
 sockfd.close()
 print('服务端已退出！')
 

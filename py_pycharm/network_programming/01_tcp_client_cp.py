@@ -18,7 +18,7 @@ while True:
     if not data:
         break
     recv_data = sockfd.recv(1024)
-    print(f'接收到的消息是：{recv_data.decode()}')
+    print(f'接收到的消息是{recv_data.decode()}')
 
 # 4.关闭套接字
 
