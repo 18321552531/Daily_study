@@ -7,10 +7,11 @@ from socket import *
 import sys
 
 # 命令行输入端口
-host = sys.argv[1]
-post = sys.argv[2]
-addr = (host, int(post))
+# host = sys.argv[1]
+# post = sys.argv[2]
+# addr = (host, int(post))
 
+addr = ('127.0.0.1', 8804)
 # 1.创建数据报套接字
 sockfd = socket(AF_INET, SOCK_DGRAM)
 

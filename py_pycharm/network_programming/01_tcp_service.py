@@ -8,8 +8,11 @@ from socket import *
 # 1.创建套接字
 sockfd = socket(AF_INET,SOCK_STREAM)
 
+# 设置端口立即释放
+sockfd.setsockopt(SOL_SOCKET,SO_REUSEADDR,1)
 # 2.绑定地址
 sockfd.bind(('0.0.0.0', 8803))
+
 
 # 3.设置接听
 sockfd.listen(10)
