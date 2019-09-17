@@ -11,7 +11,7 @@ sockfd = socket()
 # 绑定
 sockfd.bind(('0.0.0.0',8889))
 sockfd.listen(5)
-
+# ok
 while True:
     print('waiting connecting')
     connfd, addr = sockfd.accept()
