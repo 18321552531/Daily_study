@@ -4,20 +4,46 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style type="text/css">
-        a{
-            color:red;
-            text-decoration:none;
-        }
-        .c1{
+        h1.c1{
             font-size: 24px;
             background-color: orange;
             font-style: italic;
 
         }
+        .c2{
+            text-decoration:underline;
+        }
+        #nav li{
+            width: 100%;
+            height: 50px;
+            background-color: pink;
+
+        }
+        a:link{
+            color: #0b6fa2;
+            text-decoration: none;
+        }
+        a:visited{
+            color: blue;
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
     <a href="http://www.baidu.com">百度</a>
-    <h1 class="c1">你好</h1>
+    <a href="#">测试</a>
+    <h1 class="c1 c2">你好</h1>
+    <p class="c1">你好</p>
+    <div id="nav">
+        <ul>
+            <li>首页</li>
+            <ol>
+                <li>退出</li>
+            </ol>
+            <li>篮球</li>
+            <li>足球</li>
+        </ul>
+    </div>
 </body>
 </html>
