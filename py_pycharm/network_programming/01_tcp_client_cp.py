@@ -9,7 +9,7 @@ from socket import *
 sockfd = socket(AF_INET, SOCK_STREAM)
 
 # 2.发起连接
-sockfd.connect(('127.0.0.1', 8803))
+sockfd.connect(('127.0.0.1', 8888))
 
 while True:
 # 3.消息收发
