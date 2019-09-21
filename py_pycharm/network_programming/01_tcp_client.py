@@ -22,6 +22,8 @@ while True:
 
 # 4.关闭套接字
 
+
+
 sockfd.close()
 print('客户端已退出！')
 
