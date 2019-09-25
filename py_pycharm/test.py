@@ -3,6 +3,9 @@
 # @File    : test.py
 # @Author  : 啊啊
 
+
+
+import os
 def locals_func():
     a = 'aa'
     b = 'cc'
