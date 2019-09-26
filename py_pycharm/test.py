@@ -13,6 +13,9 @@ def locals_func():
     dic = locals()
     return dic
 # print(locals_func())
+'''
+I dont know what to do 
+'''
 
 
 
