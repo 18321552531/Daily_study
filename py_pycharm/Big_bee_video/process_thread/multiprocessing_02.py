@@ -36,3 +36,4 @@ for th in things:
 for i in process:
     i.join()
 print(f'use {time.time() - start_time} second')
+print('end')
