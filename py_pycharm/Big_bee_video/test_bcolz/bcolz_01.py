@@ -4,11 +4,10 @@
 # @Author  : 啊啊
 import bcolz
 
+
+
 print(bcolz.test())
 
-
-
-print('aa')
 
 
 
